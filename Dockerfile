@@ -3,7 +3,7 @@ FROM debian:bookworm
 RUN (apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y gcc make autoconf automake gettext git \
     python3-cherrypy3 python3-cheetah python3-libvirt \
-    libvirt-bin python3-imaging python3-configobj \
+    libvirt-bin python3-pil python3-configobj \
     python3-pam python3-m2crypto python3-jsonschema \
     qemu-kvm libtool python3-psutil python3-ethtool \
     sosreport python3-ipaddr python3-ldap \
