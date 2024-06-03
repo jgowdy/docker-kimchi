@@ -1,10 +1,14 @@
-mbentley/kimchi
+jgowdy/docker-kimchi
 ===============
 
 docker image for kimchi
 
+This is based on the work of mbentley
+
 To pull this image:
-`docker pull mbentley/kimchi`
+`docker pull ghcr.io/jgowdy/docker-kimchi:master`
+or
+`FROM ghcr.io/jgowdy/docker-kimchi:master`
 
 Usage:
 ```
@@ -18,5 +22,5 @@ docker run -d --restart=always --net=host --name kimchi \
   -v /var/lib/libvirt:/var/lib/libvirt \
   -v /etc/libvirt:/etc/libvirt \
   -v /path/to/your/storage:/path/to/your/storage \
-  mbentley/kimchi
+  ghcr.io/jgowdy/docker-kimchi
 ```
