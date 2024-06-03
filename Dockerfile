@@ -16,8 +16,7 @@ RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   ./autogen.sh --system &&\
   make &&\
   make install &&\
-  cd / &&\
-  rm -rf /var/lib/kimchi/isos /kimchi)
+  cd / )
 
 RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove)
 
@@ -30,7 +29,7 @@ RUN (DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3
   
 RUN (pip3 install -r requirements-UBUNTU.txt)
 COPY --from=build /kimchi /kimchi
-RUN (cd /kimchi && make install && cd / && rm -rf /kimchi)
+RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
 # Stage 3 - Copy file files into a flattened image
 FROM scratch
