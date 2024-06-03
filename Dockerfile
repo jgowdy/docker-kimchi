@@ -19,8 +19,20 @@ RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   cd / &&\
   rm -rf /var/lib/kimchi/isos /kimchi)
 
-RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git)
+RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove)
 
+# Stage 2 - Remove packages for building, copy built project
+FROM debian:bookworm as build2
+RUN (DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3-lxml \
+  python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
+  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
+  libvirt-daemon-system libvirt-clients nfs-common sosreport open-iscsi libguestfs-tools libnl-route-3-dev)
+  
+RUN (pip3 install -r requirements-UBUNTU.txt)
+COPY --from=build /kimchi /kimchi
+RUN (cd /kimchi && make install && cd / && rm -rf /kimchi)
+
+# Stage 3 - Copy file files into a flattened image
 FROM scratch
 COPY --from=build / /
 ENTRYPOINT ["kimchid"]
