@@ -17,7 +17,7 @@ RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   make &&\
   cd / )
 
-RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove)
+RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove -y)
 
 # Stage 2 - Remove packages for building, copy built project
 FROM debian:bookworm as build2
