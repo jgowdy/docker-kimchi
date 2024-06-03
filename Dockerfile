@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:bookworm as build
 
 RUN (apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y gcc make autoconf automake gettext git \
@@ -19,5 +19,9 @@ RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   cd / &&\
   rm -rf /var/lib/kimchi/isos /kimchi)
 
+RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git)
+
+FROM scratch
+COPY --from=build / /
 ENTRYPOINT ["kimchid"]
 CMD ["--host=0.0.0.0"]
