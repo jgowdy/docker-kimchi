@@ -6,7 +6,7 @@ RUN (apt-get update &&\
     libvirt-bin python3-pil python3-configobj \
     python3-pam python3-m2crypto python3-jsonschema \
     qemu-kvm libtool python3-psutil python3-ethtool \
-    sosreport python3-ipaddr python3-ldap \
+    sosreport python-ipaddr python3-ldap \
     python3-lxml nfs-common open-iscsi lvm2 xsltproc \
     python3-parted nginx python3-guestfs libguestfs-tools \
     websockify novnc spice-html5)
