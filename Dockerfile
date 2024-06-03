@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian
 MAINTAINER Matt Bentley <mbentley@mbentley.net>
 
 RUN (apt-get update &&\
