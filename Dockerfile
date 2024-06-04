@@ -28,7 +28,7 @@ RUN (apt-get update &&\
   libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev python3-pip)
 
 COPY --from=build /kimchi /kimchi
-RUN (cd /kimchi && pip3 install -r requirements-UBUNTU.txt)
+RUN (cd /kimchi && pip3 install --break-system-packages -r requirements-UBUNTU.txt)
 RUN (DEBIAN_FRONTEND=noninteractive apt-get remove python3-pip)
 RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
