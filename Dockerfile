@@ -27,11 +27,11 @@ RUN (DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3
   libvirt-daemon-system libvirt-clients nfs-common sosreport open-iscsi libguestfs-tools libnl-route-3-dev)
   
 RUN (pip3 install -r requirements-UBUNTU.txt)
-COPY --from=build2 /kimchi /kimchi
+COPY --from=build /kimchi /kimchi
 RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
 # Stage 3 - Copy file files into a flattened image
 FROM scratch
-COPY --from=build / /
+COPY --from=build2 / /
 ENTRYPOINT ["kimchid"]
 CMD ["--host=0.0.0.0"]
