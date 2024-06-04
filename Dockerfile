@@ -29,7 +29,7 @@ RUN (apt-get update &&\
 
 COPY --from=build /kimchi /kimchi
 RUN (cd /kimchi && pip3 install --break-system-packages -r requirements-UBUNTU.txt)
-RUN (DEBIAN_FRONTEND=noninteractive apt-get remove python3-pip)
+RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y python3-pip)
 RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
 # Stage 3 - Copy file files into a flattened image
