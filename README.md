@@ -6,9 +6,9 @@ docker image for kimchi
 This is based on the work of mbentley
 
 To pull this image:
-`docker pull ghcr.io/jgowdy/docker-kimchi:master`
+`docker pull ghcr.io/jgowdy/docker-kimchi:latest`
 or
-`FROM ghcr.io/jgowdy/docker-kimchi:master`
+`FROM ghcr.io/jgowdy/docker-kimchi:latest`
 
 Usage:
 ```
@@ -22,5 +22,5 @@ docker run -d --restart=always --net=host --name kimchi \
   -v /var/lib/libvirt:/var/lib/libvirt \
   -v /etc/libvirt:/etc/libvirt \
   -v /path/to/your/storage:/path/to/your/storage \
-  ghcr.io/jgowdy/docker-kimchi
+  ghcr.io/jgowdy/docker-kimchi:latest
 ```
