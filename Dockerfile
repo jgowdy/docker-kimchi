@@ -26,10 +26,10 @@ RUN (apt-get update &&\
   python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
   python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
   libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev python3-pip)
-  
-RUN (pip3 install -r requirements-UBUNTU.txt)
-RUN (DEBIAN_FRONTEND=noninteractive apt-get remove python3-pip)
+
 COPY --from=build /kimchi /kimchi
+RUN (cd /kimchi && pip3 install -r requirements-UBUNTU.txt)
+RUN (DEBIAN_FRONTEND=noninteractive apt-get remove python3-pip)
 RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
 # Stage 3 - Copy file files into a flattened image
