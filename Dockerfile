@@ -27,14 +27,16 @@ FROM debian:bookworm-slim as build2
 #  python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
 #  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
 #  libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev)
-  
-COPY --from=build /etc/kimchi /etc/kimchi
-COPY --from=build /etc/wok /etc/wok
-COPY --from=build /usr/lib/python3/dist-packages/wok /usr/lib/python3/dist-packages/wok
-COPY --from=build /usr/share/kimchi/doc /usr/share/kimchi/doc
-COPY --from=build /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo
-COPY --from=build /usr/share/wok /usr/share/wok
-COPY --from=build /var/lib/kimchi /var/lib/kimchi
+ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo"
+COPY --from=build $KIMCHI_PATHS $KIMCHI_PATHS
+#COPY --from=build /etc/wok /etc/wok
+#COPY --from=build /usr/share/wok /usr/share/wok
+#COPY --from=build /usr/lib/python3/dist-packages/wok /usr/lib/python3/dist-packages/wok
+
+#COPY --from=build /etc/kimchi /etc/kimchi
+#COPY --from=build /var/lib/kimchi /var/lib/kimchi
+#COPY --from=build /usr/share/kimchi/doc /usr/share/kimchi/doc
+#COPY --from=build /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo
 
 #COPY --from=build /kimchi /kimchi
 
