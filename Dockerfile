@@ -30,14 +30,14 @@ RUN apt-get update
 #  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
 #  libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev)
 
-RUN apt-get install -y locales \
-    && locale-gen en_US.UTF-8 \
-    && dpkg-reconfigure locales
+#RUN apt-get install -y locales \
+#    && locale-gen en_US.UTF-8 \
+#    && dpkg-reconfigure locales
     
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man/* /usr/share/doc/* /usr/share/doc-base/* /var/cache/*
     
-ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc /usr/share/locale/en_US/LC_MESSAGES"
+ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc"
 COPY --from=build $KIMCHI_PATHS $KIMCHI_PATHS
 
 #COPY --from=build /etc/wok /etc/wok
