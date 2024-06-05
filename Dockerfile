@@ -18,6 +18,8 @@ RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
 
 RUN (cd /kimchi && make install)
 
+RUN (cd /kimchi && pip3 install -r requirements-UBUNTU.txt)
+
 RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove -y)
 
 # Stage 2 - Remove packages for building, copy built project
@@ -29,9 +31,7 @@ RUN (apt-get update &&\
   libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev python3-pip)
 
 COPY --from=build /kimchi /kimchi
-RUN (cd /kimchi && pip3 install --break-system-packages -r requirements-UBUNTU.txt)
 RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y python3-pip)
-RUN (cd /kimchi && make install && cd / && rm -rf /var/lib/kimchi/isos /kimchi)
 
 # Stage 3 - Copy file files into a flattened image
 FROM scratch
