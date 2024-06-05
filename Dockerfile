@@ -9,7 +9,7 @@ RUN (apt-get update &&\
     sosreport python3-ldap \
     python3-lxml nfs-common open-iscsi lvm2 xsltproc \
     python3-parted nginx python3-guestfs libguestfs-tools \
-    websockify novnc spice-html5)
+    websockify novnc spice-html5 python3-pip)
 
 RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   cd kimchi &&\
