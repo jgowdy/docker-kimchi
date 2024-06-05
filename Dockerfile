@@ -21,12 +21,20 @@ RUN (cd /kimchi && make install)
 
 
 # Stage 2 - Remove packages for building, copy built project
-#FROM debian:bookworm-slim as build2
+FROM debian:bookworm-slim as build2
 #RUN (apt-get update &&\
 #  DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3-lxml \
 #  python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
 #  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
 #  libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev)
+  
+COPY --from=build /etc/kimchi /etc/kimchi
+COPY --from=build /etc/wok /etc/wok
+COPY --from=build /usr/lib/python3/dist-packages/wok /usr/lib/python3/dist-packages/wok
+COPY --from=build /usr/share/kimchi/doc /usr/share/kimchi/doc
+COPY --from=build /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo
+COPY --from=build /usr/share/wok /usr/share/wok
+COPY --from=build /var/lib/kimchi /var/lib/kimchi
 
 #COPY --from=build /kimchi /kimchi
 
