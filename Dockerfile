@@ -21,17 +21,17 @@ RUN (cd /kimchi && make install)
 
 
 # Stage 2 - Remove packages for building, copy built project
-FROM debian:bookworm-slim as build2
-RUN (apt-get update &&\
-  DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3-lxml \
-  python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
-  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
-  libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev)
+#FROM debian:bookworm-slim as build2
+#RUN (apt-get update &&\
+#  DEBIAN_FRONTEND=noninteractive apt-get install -y python3-configobj python3-lxml \
+#  python3-magic python3-paramiko python3-ldap spice-html5 novnc qemu-kvm python3-libvirt\
+#  python3-parted python3-ethtool python3-guestfs python3-pil python3-cherrypy3 libvirt0 \
+#  libvirt-daemon-system libvirt-clients nfs-common sosreport libguestfs-tools libnl-route-3-dev)
 
-COPY --from=build /kimchi /kimchi
+#COPY --from=build /kimchi /kimchi
 
 # Stage 3 - Copy file files into a flattened image
-FROM scratch
-COPY --from=build2 / /
-ENTRYPOINT ["kimchid"]
-CMD ["--host=0.0.0.0"]
+#FROM scratch
+#COPY --from=build2 / /
+#ENTRYPOINT ["kimchid"]
+#CMD ["--host=0.0.0.0"]
