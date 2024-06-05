@@ -14,9 +14,9 @@ RUN (apt-get update &&\
 RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
   cd kimchi &&\
   ./autogen.sh --system &&\
-  make &&\
-  make install &&\
-  cd / )
+  make)
+
+RUN (cd /kimchi && make install)
 
 RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove -y)
 
