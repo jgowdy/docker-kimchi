@@ -11,16 +11,14 @@ RUN (apt-get update &&\
     python3-parted nginx python3-guestfs libguestfs-tools \
     websockify novnc spice-html5 python3-pip)
 
-RUN (git clone https://github.com/kimchi-project/kimchi.git &&\
-  cd kimchi &&\
-  ./autogen.sh --system &&\
-  make)
+RUN (git clone https://github.com/kimchi-project/kimchi.git)
+
+RUN (cd /kimchi && pip3 install --break-system-packages -r requirements-UBUNTU.txt)
+
+RUN (cd /kimchi && ./autogen.sh --system && make)
 
 RUN (cd /kimchi && make install)
 
-RUN (cd /kimchi && pip3 install -r requirements-UBUNTU.txt)
-
-RUN (DEBIAN_FRONTEND=noninteractive apt-get remove -y gcc make autoconf automake git && apt-get autoremove -y)
 
 # Stage 2 - Remove packages for building, copy built project
 FROM debian:bookworm-slim as build2
