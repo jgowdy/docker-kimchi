@@ -1,4 +1,4 @@
-FROM debian:bookworm as build
+FROM debian:bookworm-slim as build
 
 RUN (apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y gcc make autoconf automake gettext git \
