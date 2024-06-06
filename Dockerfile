@@ -37,9 +37,9 @@ RUN apt-get update
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man/* /usr/share/doc/* /usr/share/doc-base/* /var/cache/*
     
-ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc"
-COPY --from=build $KIMCHI_PATHS $KIMCHI_PATHS
-
+#ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc"
+#COPY --from=build $KIMCHI_PATHS $KIMCHI_PATHS
+COPY --from=build /etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc /etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc
 #COPY --from=build /etc/wok /etc/wok
 #COPY --from=build /usr/share/wok /usr/share/wok
 #COPY --from=build /usr/lib/python3/dist-packages/wok /usr/lib/python3/dist-packages/wok
