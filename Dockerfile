@@ -35,22 +35,24 @@ RUN apt-get update
 #    && dpkg-reconfigure locales
     
 RUN apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man/* /usr/share/doc/* /usr/share/doc-base/* /var/cache/*
-    
-#ENV KIMCHI_PATHS="/etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc"
-#COPY --from=build $KIMCHI_PATHS $KIMCHI_PATHS
-COPY --from=build /etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc /etc/wok /usr/share/wok /usr/lib/python3/dist-packages/wok /etc/kimchi /var/lib/kimchi /usr/share/kimchi/doc
-#COPY --from=build /etc/wok /etc/wok
-#COPY --from=build /usr/share/wok /usr/share/wok
-#COPY --from=build /usr/lib/python3/dist-packages/wok /usr/lib/python3/dist-packages/wok
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man/* /usr/share/doc/* /usr/share/doc-base/* /var/cache/*  
 
-#COPY --from=build /etc/kimchi /etc/kimchi
-#COPY --from=build /var/lib/kimchi /var/lib/kimchi
-#COPY --from=build /usr/share/kimchi/doc /usr/share/kimchi/doc
-#COPY --from=build /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo
-
-#COPY --from=build /kimchi /kimchi
-
+COPY --from=build \
+  /etc/wok \
+  /usr/share/wok \
+  /usr/lib/python3/dist-packages/wok \
+  /etc/kimchi \
+  /var/lib/kimchi \
+  /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo \
+  /usr/share/kimchi/doc \
+  /etc/wok \
+  /usr/share/wok \
+  /usr/lib/python3/dist-packages/wok \
+  /etc/kimchi \
+  /var/lib/kimchi \
+  /usr/share/locale/en_US/LC_MESSAGES/kimchi.mo \
+  /usr/share/kimchi/doc
+  
 # Stage 3 - Copy file files into a flattened image
 #FROM scratch
 #COPY --from=build2 / /
